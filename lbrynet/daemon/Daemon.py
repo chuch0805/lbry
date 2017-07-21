@@ -2392,21 +2392,6 @@ class Daemon(AuthJSONRPCServer):
         response = yield self._render_response(True)
         defer.returnValue(response)
 
-    def jsonrpc_blob_announce_all(self):
-        """
-        Announce all blobs to the DHT
-
-        Usage:
-            blob_announce_all
-
-        Returns:
-            (str) Success/fail message
-        """
-
-        d = self.session.blob_manager.immediate_announce_all_blobs()
-        d.addCallback(lambda _: self._render_response("Announced"))
-        return d
-
     @defer.inlineCallbacks
     def jsonrpc_reflect(self, sd_hash):
         """
